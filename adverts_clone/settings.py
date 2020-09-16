@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+# import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,6 +22,7 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+# os.environ.get('CRAIGSLIST_KEY')
 SECRET_KEY = 'cwjakac0(%8!mp@=-xhjsm4bwm#+mq-is=!^rs4(nw&wa*hui*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -51,7 +53,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'craigslist_clone.urls'
+ROOT_URLCONF = 'adverts_clone.urls'
 
 TEMPLATES = [
     {
@@ -69,7 +71,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'craigslist_clone.wsgi.application'
+WSGI_APPLICATION = 'adverts_clone.wsgi.application'
 
 
 # Database
@@ -121,3 +123,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+
+# django_heroku.settings(locals())
