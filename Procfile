@@ -1,1 +1,1 @@
-web: gunicorn craigslist_clone.wsgi
+web: gunicorn adverts_clone.wsgi
