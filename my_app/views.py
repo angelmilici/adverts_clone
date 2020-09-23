@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 from . import models
 # Create your views here.
 
-BASE_ADVERTS_URL = 'https://www.adverts.ie/for-sale/q_{}/'
+BASE_ADVERTS_URL = 'https://www.adverts.ie/for-sale/q_{}/price_{}-{}/'
 # BASE_IMAGE_URL = 'https://images.craigslist.org/{}_300x300.jpg'
 
 
@@ -16,12 +16,17 @@ def home(request):
 def new_search(request):
     search = request.POST.get('search')
     models.Search.objects.create(search=search)
-    final_url = BASE_ADVERTS_URL.format(quote_plus(search))
+    from_price = request.POST.get('from_price', 0)
+    to_price = request.POST.get('to_price', 1000)
+    final_url = BASE_ADVERTS_URL.format(quote_plus(search), from_price, to_price)
     print(final_url)
+    # Getting the webpage, creating a Response object.
     response = requests.get(final_url)
+    # Extracting the source code of the page.
     data = response.text
+    # Passing the source code to Beautiful Soup to create a BeautifulSoup object for it.
     soup = BeautifulSoup(data, features="html.parser")
-
+    # Extracting all the <div> tags whose class name is 'sr-grid-cell quick-peek-container' into a list.
     post_listings = soup.find_all('div', {'class':
                                           'sr-grid-cell quick-peek-container'})
     final_postings = []

@@ -55,6 +55,8 @@
     <form action="{% url 'new_search' %}" method="post">
         {% csrf_token %}
         <input type="text" name="search" placeholder="search">
+        <input type="text" name="from_price" placeholder="From: ">
+        <input type="text" name="to_price" placeholder="To: ">
         <button class="btn waves-effect waves-light" type="submit" name="action">Submit
             <i class="material-icons right">send</i>
         </button>
